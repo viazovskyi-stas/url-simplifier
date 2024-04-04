@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import useSWR, { mutate } from 'swr';
+import { mutate } from 'swr';
 import useSWRMutation from 'swr/mutation';
-
-interface CreateShortUrlFormProps {
-  refreshList: () => void;
-}
 
 async function sendRequest(
   url: string,
@@ -18,7 +14,7 @@ async function sendRequest(
 const CreateShortUrlForm = () => {
   const { trigger, isMutating } = useSWRMutation(
     '/api/user',
-    sendRequest /* опции */
+    sendRequest
   );
 
   const [originalUrl, setOriginalUrl] = useState('');
@@ -26,9 +22,9 @@ const CreateShortUrlForm = () => {
     setOriginalUrl(e.target.value);
   };
   const createShorten = async () => {
-    trigger({ originalUrl });
+    await trigger({ originalUrl });
     setOriginalUrl('');
-    mutate('/api/get-links');
+    await mutate('/api/get-links');
   };
 
   return (
