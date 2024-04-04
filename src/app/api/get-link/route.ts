@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
     if (!linkExists) {
       return NextResponse.json(
         {
-          message: 'Slug does not exist',
+          message: 'Hash does not exist',
         },
         { status: 400 }
       );

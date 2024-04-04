@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-export default function useGetLink(hash: string) {
-  const [response, setResponse] = useState<{original_url: string} | null>(null);
+export default function useGetSimplifiedLink(hash: string) {
+  const [response, setResponse] = useState<{ original_url: string } | null>(
+    null
+  );
   const [error, setError] = useState('');
   const [loading, setloading] = useState(true);
 
