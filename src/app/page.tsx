@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import axios from 'axios';
 
 export default function Home() {
   const [longUrl, setLongUrl] = useState('');
@@ -8,7 +9,17 @@ export default function Home() {
     setLongUrl(e.target.value);
   };
 
-  const createShorten = async () => {};
+  const createShorten = async () => {
+    console.log(`Make this short: ${longUrl}`);
+
+    const result = await axios.post('/api/create-link', {
+      original_url: longUrl,
+    });
+
+    console.log(result);
+
+    setLongUrl('');
+  };
 
   return (
     <main className='flex min-w-[60rem] flex-col items-center justify-center gap-5 rounded-md bg-transparent bg-white bg-opacity-40 p-5'>

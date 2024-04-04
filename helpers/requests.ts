@@ -1,5 +1,4 @@
-
-import { ValidationError } from "yup";
+import { ValidationError } from 'yup';
 
 export const constructKeyValueResp = (
   details: string
@@ -14,7 +13,7 @@ export const constructKeyValueResp = (
       value: match[2],
     };
   } else {
-    throw new Error("Failed construct key value");
+    throw new Error('Failed construct key value');
   }
 };
 
@@ -34,21 +33,21 @@ export const generateErrorData = (error: any): ErrorDataType => {
   if (error instanceof ValidationError) {
     return {
       code: 422,
-      message: "Validation error",
+      message: 'Validation error',
       errors: error.errors,
     };
   }
 
   // row not found
-  if (error.code === "PGRST116") {
+  if (error.code === 'PGRST116') {
     return {
       code: 404,
-      message: "Data not found",
+      message: 'Data not found',
     };
   }
 
   // duplicate values
-  if (error.code === "23505") {
+  if (error.code === '23505') {
     const { key, value } = constructKeyValueResp(error.details);
     let message = `'${value}' is already exist for ${key}`;
     return {
@@ -62,14 +61,14 @@ export const generateErrorData = (error: any): ErrorDataType => {
 
 export const parseRequestBody = async (req: Request): Promise<any> => {
   try {
-    const contentType = req.headers.get("Content-Type") as string;
+    const contentType = req.headers.get('Content-Type') as string;
 
-    if (contentType && contentType.includes("application/json")) {
+    if (contentType && contentType.includes('application/json')) {
       return await req.json();
     } else if (
       (contentType &&
-        contentType.includes("application/x-www-form-urlencoded")) ||
-      contentType.includes("multipart/form-data")
+        contentType.includes('application/x-www-form-urlencoded')) ||
+      contentType.includes('multipart/form-data')
     ) {
       const formData = await req.formData();
       let form: Record<string, string | File> = {};
@@ -82,7 +81,7 @@ export const parseRequestBody = async (req: Request): Promise<any> => {
 
       return form;
     } else {
-      throw new Error("Unsupported content type");
+      throw new Error('Unsupported content type');
     }
   } catch (error) {
     // Handle errors here or let them propagate
