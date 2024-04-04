@@ -31,15 +31,15 @@ export async function POST(request: NextRequest) {
     if (!linkExists) {
       await urlInfoCollection.insertOne({
         original_url,
-        uid: hash,
-        shortUrl: shortUrl,
-        createdAt: new Date(),
+        hash,
+        short_url: shortUrl,
+        created_at: new Date(),
       });
     }
     return NextResponse.json(
       {
         original_url,
-        full_url: `${linkExists?.shortUrl || shortUrl}`,
+        short_url: `${linkExists?.shortUrl || shortUrl}`,
         linkExists,
       },
       { status: 201 }

@@ -1,15 +1,29 @@
 import connectToDatabase from '@/database/mongodb';
 import { NextResponse } from 'next/server';
-
-export async function GET() {
+import { type NextRequest } from 'next/server';
+export async function POST(request: NextRequest) {
   // TODO validation and error handling
+  const res = await request.json();
+  const { hash } = res;
+
   try {
     const database = await connectToDatabase();
     const urlInfoCollection = database.collection('url-info');
-    const list = await urlInfoCollection.find().toArray();
+    const linkExists = await urlInfoCollection.findOne({
+      hash,
+    });
+
+    if (!linkExists) {
+      return NextResponse.json(
+        {
+          message: 'Slug does not exist',
+        },
+        { status: 400 }
+      );
+    }
     return NextResponse.json(
       {
-        list,
+        original_url: linkExists?.original_url,
       },
       { status: 200 }
     );
