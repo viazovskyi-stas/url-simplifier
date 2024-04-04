@@ -4,6 +4,8 @@ Build a web application that takes a full URL and returns a shortened version of
 
 ## Usage
 
+Copy .env.example to .env
+
 Clone the repo and run the following commands:
 
     npm install
