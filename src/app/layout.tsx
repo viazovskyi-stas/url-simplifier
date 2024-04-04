@@ -5,6 +5,7 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
+  icons: 'favicon.ico',
   title: 'URL Simplifier Application',
   description:
     'Web application that takes a full URL and returns a shortened version of it.',

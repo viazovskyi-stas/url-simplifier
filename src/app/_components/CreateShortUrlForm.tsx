@@ -5,15 +5,15 @@ interface CreateShortUrlFormProps {
   refreshList: () => void;
 }
 const CreateShortUrlForm = ({ refreshList }: CreateShortUrlFormProps) => {
-  const [longUrl, setLongUrl] = useState('');
-  const longUrlOnnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLongUrl(e.target.value);
+  const [originalUrl, setOriginalUrl] = useState('');
+  const originalUrlOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setOriginalUrl(e.target.value);
   };
   const createShorten = async () => {
-    const result = await axios.post('/api/create-link', {
-      original_url: longUrl,
+    await axios.post('/api/create-link', {
+      original_url: originalUrl,
     });
-    setLongUrl('');
+    setOriginalUrl('');
     await refreshList();
   };
 
@@ -24,8 +24,8 @@ const CreateShortUrlForm = ({ refreshList }: CreateShortUrlFormProps) => {
         type='text'
         name='original_url'
         placeholder='Enter long url'
-        value={longUrl}
-        onChange={longUrlOnnChange}
+        value={originalUrl}
+        onChange={originalUrlOnChange}
         className='w-full rounded-md border-2 px-3 py-2 text-base text-black outline-0 '
       />
       <button

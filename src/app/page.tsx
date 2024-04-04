@@ -5,6 +5,9 @@ import LinkList from '@/src/app/_components/LinkList';
 import { UrlInfoItem } from '@/types/url-info';
 import CreateShortUrlForm from '@/src/app/_components/CreateShortUrlForm';
 
+// TODO:
+// Optimize api request (LOADING, Error Handling) maybe use (useReactQuery, or useSWR)
+// In case of time restriction there is no loading and error handling
 export default function Home() {
   const [links, setLinks] = useState<Array<UrlInfoItem>>([]);
   const getLinksData = async () => {
@@ -14,6 +17,7 @@ export default function Home() {
     } = result;
     setLinks(list);
   };
+
   useEffect(() => {
     getLinksData();
   }, []);
