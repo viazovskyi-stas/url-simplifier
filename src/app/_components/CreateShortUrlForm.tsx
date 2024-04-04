@@ -19,6 +19,7 @@ const CreateShortUrlForm = () => {
 
   const [originalUrl, setOriginalUrl] = useState('');
   const originalUrlOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // TODO add validation for url
     setOriginalUrl(e.target.value);
   };
   const createShorten = async () => {
