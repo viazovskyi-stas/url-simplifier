@@ -12,10 +12,7 @@ async function sendRequest(
   });
 }
 const CreateShortUrlForm = () => {
-  const { trigger, isMutating } = useSWRMutation(
-    '/api/user',
-    sendRequest
-  );
+  const { trigger, isMutating } = useSWRMutation('/api/user', sendRequest);
 
   const [originalUrl, setOriginalUrl] = useState('');
   const originalUrlOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {

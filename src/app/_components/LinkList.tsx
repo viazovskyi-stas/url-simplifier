@@ -26,7 +26,7 @@ const LinkList = () => {
           <th className='w-1/4 p-4'>Created At</th>
         </tr>
       </thead>
-      <tbody className='bg-grey-light flex  w-full flex-col items-center overflow-y-scroll h-[300px]'>
+      <tbody className='bg-grey-light flex  h-[300px] w-full flex-col items-center overflow-y-scroll'>
         {(data?.data.list || []).map((item, index) => {
           return (
             <tr className='mb-4 flex w-full' key={item._id}>
